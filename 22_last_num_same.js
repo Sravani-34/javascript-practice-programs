@@ -5,10 +5,5 @@ function haveSameLastDigit(num1, num2) {
 	let lastDigit2 = num2 % 10; 
 	return lastDigit1 === lastDigit2; 
 } 
-
-
-const number1 = 126; 
-const number2 = 457; 
-
-const result = haveSameLastDigit(number1, number2); 
+ var result =haveSameLastDigit(126,456); 
 console.log(result);
