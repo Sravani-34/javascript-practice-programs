@@ -21,5 +21,5 @@ else if(num>1)
     console.log("The given number is prime number");
  }
  else{
-    console.log("The given number is not prime number")
+    console.log("The given number is not prime number");
  }

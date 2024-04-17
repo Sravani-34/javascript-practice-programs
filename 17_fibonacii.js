@@ -13,4 +13,6 @@ function fibnocii(num)
     }return num3;
 }
 var num=5;
+
 console.log(fibnocii(num));
+
