@@ -1,0 +1,32 @@
+name: Run Cypress Tests
+
+on: 
+  push:  # Run tests when code is pushed to GitHub
+    branches:
+      - main  # Only run tests on the main branch
+  pull_request:  # Run tests for pull requests
+
+jobs:
+  cypress_tests:
+    runs-on: ubuntu-latest  # Use Ubuntu to run the tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # Get the latest code from repo
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # Install Node.js to run Cypress
+
+      - name: Install dependencies
+        run: npm install  # Install Cypress and project dependencies
+
+      - name: Run Cypress tests
+        run: npx cypress run --browser chrome  # Run tests in Chrome browser
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-report
+          path: cypress/reports  # Save test report files
