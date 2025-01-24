@@ -1,1 +1,38 @@
-Hi
+name: Load Testing with Postman
+
+on: 
+  push:
+    branches:
+      - main  # Run the test when code is pushed to the main branch
+  workflow_dispatch:  # Allows manual run
+
+jobs:
+  load_test:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4  # Get the latest code from repo
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'  # Install Node.js to run Newman
+
+    - name: Install Newman
+      run: npm install -g newman  # Install Newman globally
+
+    - name: Run Postman Collection
+      run: |
+        newman run my-collection.json \
+        -e my-environment.json \
+        --iteration-count 100 \
+        --reporters cli,html \
+        --reporter-html-export report.html
+
+    - name: Upload Test Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: load-test-report
+        path: report.html  # Save the test report for review
+
